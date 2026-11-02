@@ -78,7 +78,7 @@ The concepts in this notebook follow Elhage et al. (2021), [A Mathematical Frame
 
 ### 1. Worked example in numpy
 
-Input embeddings for the three tokens "Quick", "brown" and "fox", and the Q and K matrices (T01). The scaled scores QK<sup>T</sup>/&radic;d<sub>k</sub> and the softmax, with the maximum subtracted first for numerical stability (T02). The V matrix, the attention output OV and the final output through W<sub>O</sub> (T03). Interpretation of the result: every token attends fully to "fox", so every output row is built from the value vector of "fox", and W<sub>O</sub> projects the result back to d<sub>model</sub> (T04).
+Input embeddings for the three tokens "Quick", "brown" and "fox", and the Q and K matrices (T01). The scaled scores QK<sup>T</sup>/&radic;d<sub>k</sub> and the softmax, with the maximum subtracted first for numerical stability (T02). The V matrix, the attention output OV and the final output through W<sub>O</sub> (T03). Interpretation of the result: every token attends fully to "fox", hence every output row is built from the value vector of "fox", and W<sub>O</sub> projects the result back to d<sub>model</sub> (T04).
 
 <img src="transformers/T01_worked_example_steps_1_to_3_embeddings_Q_and_K.jpg" width="49%"> <img src="transformers/T02_worked_example_steps_4_5_QK_scores_and_softmax.jpg" width="49%">
 <img src="transformers/T03_worked_example_steps_6_to_8_V_OV_and_output.jpg" width="49%"> <img src="transformers/T04_worked_example_interpretation.jpg" width="49%">
@@ -97,10 +97,10 @@ Notes on the shapes and indices of each matrix, the direction of influence in a 
 > **About `np.einsum`:**
 > - `np.einsum` (Einstein summation) writes a matrix operation by giving each dimension a letter.
 > - `np.einsum('bsm,mk->bsk', x, W_Q)` gives the same result as `x @ W_Q`. Here b is the batch, s is the token position, m is the embedding feature and k is the query feature.
-> - The letter m appears in both inputs but not in the output, so it is summed over. The other letters are kept.
+> - The letter m appears in both inputs but not in the output, it is thus summed over. The other letters are kept.
 > - It is widely used in transformer interpretability because every dimension is named. The code shows which ones are summed over without transposing or reshaping.
 > - It combines weight matrices directly into the QK and OV circuits.
-> - It keeps the source and destination positions apart, so each token-to-token contribution can be read out (T13 and T15).
+> - It keeps the source and destination positions apart, each token-to-token contribution can thus be read out (T13 and T15).
 
 <img src="transformers/T06_skip_trigram_dimensions_and_direction_of_influence.jpg" width="49%"> <img src="transformers/T07_skip_trigram_transformer_circuit_code.jpg" width="49%">
 <img src="transformers/T08_QK_circuit_and_embedding_notes.jpg" width="49%"> <img src="transformers/T09_tokenisation_and_index_notes.jpg" width="49%">

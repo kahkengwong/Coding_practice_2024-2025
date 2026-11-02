@@ -94,9 +94,13 @@ The same steps as three functions: the QK matrix, the attention weights and the 
 Notes on the shapes and indices of each matrix, the direction of influence in a skip-trigram, and the combined W<sub>QK</sub> and W<sub>OV</sub> matrices written with `np.einsum`. The notes pages face the code they explain.
 
 > [!NOTE]
-> **About `np.einsum`:** `np.einsum` (Einstein summation) writes a matrix operation by giving each dimension a letter. For example, `np.einsum('bsm,mk->bsk', x, W_Q)` gives the same result as `x @ W_Q`. Here b is the batch, s is the token position, m is the embedding feature and k is the query feature. The letter m appears in both inputs but not in the output, so it is summed over, and the other letters are kept.
->
-> It is widely used in transformer interpretability because every dimension is named, the code thus shows which ones are summed over without transposing or reshaping. It also combines weight matrices directly into the QK and OV circuits, and keeps the source and destination positions apart. Therefore, each token-to-token contribution can be read out (T13 and T15).
+> **About `np.einsum`:**
+> - `np.einsum` (Einstein summation) writes a matrix operation by giving each dimension a letter.
+> - `np.einsum('bsm,mk->bsk', x, W_Q)` gives the same result as `x @ W_Q`. Here b is the batch, s is the token position, m is the embedding feature and k is the query feature.
+> - The letter m appears in both inputs but not in the output, so it is summed over. The other letters are kept.
+> - It is widely used in transformer interpretability because every dimension is named. The code shows which ones are summed over without transposing or reshaping.
+> - It combines weight matrices directly into the QK and OV circuits.
+> - It keeps the source and destination positions apart, so each token-to-token contribution can be read out (T13 and T15).
 
 <img src="transformers/T06_skip_trigram_dimensions_and_direction_of_influence.jpg" width="49%"> <img src="transformers/T07_skip_trigram_transformer_circuit_code.jpg" width="49%">
 <img src="transformers/T08_QK_circuit_and_embedding_notes.jpg" width="49%"> <img src="transformers/T09_tokenisation_and_index_notes.jpg" width="49%">
@@ -155,8 +159,10 @@ Level 6 computes the vocabulary-level QK circuit W<sub>E</sub><sup>T</sup>W<sub>
 
 ---
 
-## Reference
-Elhage, N., Nanda, N., Olsson, C., Henighan, T., Joseph, N., Mann, B., et al. (2021). A Mathematical Framework for Transformer Circuits. *Transformer Circuits Thread*. https://transformer-circuits.pub/2021/framework/index.html
+## References
+1. Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., Polosukhin, I. (2017). Attention is all you need. *Advances in Neural Information Processing Systems*, 30. https://arxiv.org/abs/1706.03762
+2. Elhage, N., Nanda, N., Olsson, C., Henighan, T., Joseph, N., Mann, B., et al. (2021). A Mathematical Framework for Transformer Circuits. *Transformer Circuits Thread*. https://transformer-circuits.pub/2021/framework/index.html
+3. Ameisen, E., Lindsey, J., Pearce, A., Gurnee, W., Turner, N. L., Chen, B., Citro, C., et al. (2025). Circuit Tracing: Revealing Computational Graphs in Language Models. *Transformer Circuits Thread*. https://transformer-circuits.pub/2025/attribution-graphs/methods.html
 
 ---
 

@@ -142,6 +142,17 @@ Level 6 computes the vocabulary-level QK circuit W<sub>E</sub><sup>T</sup>W<sub>
 <img src="transformers/T30_final_level_6_vocab_level_circuits.jpg" width="49%"> <img src="transformers/T31_final_level_6_continued.jpg" width="49%">
 <img src="transformers/T32_final_level_7_skip_trigram_paper_approach.jpg" width="49%"> <img src="transformers/T33_final_level_7_continued.jpg" width="49%">
 
+
+> [!NOTE]
+> **From the output to the answer:** The code above stops at the output logits (when W<sub>U</sub> is given). The logits are one score for each token in the vocabulary, at each position. To produce text, the model then repeats three steps:
+> 1. Converts the logits at the last position into probabilities with softmax.
+> 2. Picks the next token, for example the one with the highest probability.
+> 3. Appends that token to the input and runs again.
+>
+> - With the input "Quick brown", "fox" may get the highest probability. The next input is "Quick brown fox", which may give "jumps".
+> - This repeats one token at a time until an end-of-sequence token or a length limit is reached.
+> - A full model, such as a chatbot, works the same way. It stacks many layers, each with attention and a feed-forward (MLP) block, and turns the tokens back into text at the end.
+
 ---
 
 ## Reference

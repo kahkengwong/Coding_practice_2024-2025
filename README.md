@@ -96,7 +96,7 @@ Notes on the shapes and indices of each matrix, the direction of influence in a 
 > [!NOTE]
 > **About `np.einsum`:** `np.einsum` (Einstein summation) writes a matrix operation by giving each dimension a letter. For example, `np.einsum('bsm,mk->bsk', x, W_Q)` gives the same result as `x @ W_Q`. Here b is the batch, s is the token position, m is the embedding feature and k is the query feature. The letter m appears in both inputs but not in the output, so it is summed over, and the other letters are kept.
 >
-> It is widely used in transformer interpretability because every dimension is named, so the code shows which ones are summed over without transposing or reshaping. It also combines weight matrices directly into the QK and OV circuits, and keeps the source and destination positions apart, so each token-to-token contribution can be read out (T13 and T15).
+> It is widely used in transformer interpretability because every dimension is named, the code thus shows which ones are summed over without transposing or reshaping. It also combines weight matrices directly into the QK and OV circuits, and keeps the source and destination positions apart. Therefore, each token-to-token contribution can be read out (T13 and T15).
 
 <img src="transformers/T06_skip_trigram_dimensions_and_direction_of_influence.jpg" width="49%"> <img src="transformers/T07_skip_trigram_transformer_circuit_code.jpg" width="49%">
 <img src="transformers/T08_QK_circuit_and_embedding_notes.jpg" width="49%"> <img src="transformers/T09_tokenisation_and_index_notes.jpg" width="49%">

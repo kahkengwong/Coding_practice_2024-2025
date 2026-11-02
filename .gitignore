@@ -1,0 +1,11 @@
+source_photos/
+prepare_coding_repo.r
+prepare_coding_repo_log.txt
+*.rar
+*.zip
+*.pdf
+.Rhistory
+.RData
+.Rproj.user/
+Thumbs.db
+desktop.ini
